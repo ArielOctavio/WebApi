@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Data;
+using WebApi.Helpers;
 using WebApi.Models;
 
 namespace WebApi.Controllers
@@ -12,6 +14,15 @@ namespace WebApi.Controllers
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
+
+        private readonly WebApiContext _context;
+
+        public AccountController(WebApiContext context)
+        {
+            _context = context;
+        }
+
+
         public JsonResult Index()
         {
             var user = new userLogin();
@@ -23,11 +34,38 @@ namespace WebApi.Controllers
         }
 
 
-        public JsonResult Login()
+        [HttpPost]
+        public IActionResult Login([FromBody] userLogin model)
         {
 
-            var ret = "Hola que tal";
-            return Json(ret);
-         }
+            var PassEncript = Seguridad.Encriptarpass(model.Password);
+            var user = _context.userLogin.Where(u => u.Email == model.Email && u.Password == PassEncript).FirstOrDefault();
+
+            if (user != null)
+            {
+                if(user.Token==null)
+                {
+                    setToken(user);
+                }
+                var userRet = new userReturn(user.Nombre, user.Apellido, user.Token);
+
+                return Ok(new JsonResult(userRet));
+            }
+
+            var error = new ErrorRequest("Datos incorrectos");
+            return  NotFound(error.ToJson());
+        }
+
+        private string setToken(userLogin user)
+        {
+
+            user.Token =  Guid.NewGuid().ToString();
+
+            _context.Update(user);
+            _context.SaveChanges();
+            return user.Token;
+
+
+        }
     }
 }
