@@ -4,12 +4,13 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Funciones;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Models;
 using WebApi.Data;
 using WebApi.Models;
-using WebApi.Helpers;
 
 namespace WebApi.Controllers
 {

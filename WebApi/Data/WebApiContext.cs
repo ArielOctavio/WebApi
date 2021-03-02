@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Models;
 using WebApi.Models;
 
 namespace WebApi.Data
@@ -14,6 +15,6 @@ namespace WebApi.Data
         {
         }
 
-        public DbSet<WebApi.Models.userLogin> userLogin { get; set; }
+        public DbSet<userLogin> userLogin { get; set; }
     }
 }

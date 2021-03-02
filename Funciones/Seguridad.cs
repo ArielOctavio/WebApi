@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace WebApi.Helpers
+namespace Funciones
 {
     public static class Seguridad
     {
@@ -26,5 +23,6 @@ namespace WebApi.Helpers
             return encryptdata.ToString();
 
         }
+
     }
 }
