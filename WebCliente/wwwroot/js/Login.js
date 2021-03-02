@@ -7,7 +7,6 @@
     var user = {
         email: email,
         password: password
-
     }
 
 
@@ -22,6 +21,8 @@
     };
 
     $.ajax(settings).done(function (response) {
+        console.log(response);
+    }).fail(function (error) {
         console.log(response);
     });
 

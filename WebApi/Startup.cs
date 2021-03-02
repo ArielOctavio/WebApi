@@ -32,8 +32,8 @@ namespace WebApi
             services.AddDbContext<WebApiContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("WebApiContext")));
             services.AddCors(); // Make sure you call this previous to AddMvc
-            services.AddMvc(mvc=>mvc.EnableEndpointRouting=false);
-           
+            services.AddMvc(mvc => mvc.EnableEndpointRouting = false);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,23 +50,16 @@ namespace WebApi
 
             app.UseAuthorization();
             app.UseCors(builder => builder
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
             //app.UseEndpoints(endpoints =>
             //{
             //    endpoints.MapControllers();
             //    endpoints.MapControllerRoute(name: "default", pattern: "{controller=Account}/{action=Index}/{id?}");
             //});
-           
+
             app.UseMvc();
-
-
-
-
-
-
-
 
         }
     }
