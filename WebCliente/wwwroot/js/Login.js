@@ -22,8 +22,18 @@
 
     $.ajax(settings).done(function (response) {
         console.log(response);
+        window.location = '/Home/Bienvenida/?Nombre=' + response.value.nombre + ', ' + response.value.apellido;
+
+
     }).fail(function (error) {
-        console.log(response);
+        console.log(error);
+        //alert("Datos incorrectos")
+        //java script
+        // var elemtError = document.getElementById("ErrorLabel");
+
+        //jquery
+        var elemtErrorJQ = $("#ErrorLabel");
+        elemtErrorJQ.html("Datos incorrectos");
     });
 
 }
